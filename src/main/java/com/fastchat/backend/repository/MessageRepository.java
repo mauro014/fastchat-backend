@@ -1,4 +1,4 @@
-package com.fastchat.backend.repositories;
+package com.fastchat.backend.repository;
 
 import com.fastchat.backend.model.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
