@@ -10,7 +10,7 @@ COPY src ./src
 RUN ./mvnw clean package -DskipTests
 
 # Use a smaller image for running the application
-FROM openjdk:17-jre-slim
+FROM openjdk:17-jdk-slim
 
 # Set the working directory in the container
 WORKDIR /app
