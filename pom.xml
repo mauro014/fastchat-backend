@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.fastchat</groupId>
-	<artifactId>backend</artifactId>
+	<artifactId>fastchat-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
-	<name>backend</name>
+	<packaging>jar</packaging>
+	<name>fastchat-backend</name>
 	<description>Real Time Chat</description>
 	<url/>
 	<licenses>
