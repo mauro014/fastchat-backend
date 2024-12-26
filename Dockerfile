@@ -1,5 +1,5 @@
 # Use the official OpenJDK 17 image as the base image for building the application
-FROM openjdk:17-jdk-slim AS build
+FROM openjdk:17-oracle AS build
 
 # Set the working directory
 WORKDIR /app
@@ -10,7 +10,7 @@ COPY src ./src
 RUN ./mvnw clean package -DskipTests
 
 # Use a smaller image for running the application
-FROM openjdk:17-jdk-slim
+FROM openjdk:17-oracle
 
 # Set the working directory in the container
 WORKDIR /app
