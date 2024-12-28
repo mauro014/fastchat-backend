@@ -1,7 +1,7 @@
 package com.fastchat.backend.api;
 
 import com.fastchat.backend.model.Message;
-import com.fastchat.backend.services.MessageService;
+import com.fastchat.backend.service.MessageService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,18 +18,8 @@ public class MessageController {
         this.messageService = messageService;
     }
 
-    @GetMapping("sendMessage")
-    public String sendMessage(){
-        return "Sending Message";
-    }
-
     @GetMapping("getAllMessages")
     public List<Message> getAllMessages() {
         return messageService.getAllMessages();
-    }
-
-    @GetMapping("deleteAllMessages")
-    public void deleteAll(){
-        messageService.deleteAll();
     }
 }
