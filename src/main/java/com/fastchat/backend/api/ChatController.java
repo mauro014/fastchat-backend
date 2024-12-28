@@ -18,11 +18,9 @@ public class ChatController {
 
     @MessageMapping("/sendMessage")
     @SendTo("/topic/messages")
-    public Message sendMessage(Message message) throws Exception {
+    public Message sendMessage(Message message) {
 
         messageService.save(message);
-
-        Thread.sleep(1000);
 
         return message;
     }

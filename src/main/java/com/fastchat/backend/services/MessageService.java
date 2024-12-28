@@ -22,4 +22,8 @@ public class MessageService {
     public void save(Message message) {
         messageRepository.save(message);
     }
+
+    public void deleteAll(){
+        messageRepository.deleteAll();
+    }
 }

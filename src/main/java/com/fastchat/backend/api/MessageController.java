@@ -27,4 +27,9 @@ public class MessageController {
     public List<Message> getAllMessages() {
         return messageService.getAllMessages();
     }
+
+    @GetMapping("deleteAllMessages")
+    public void deleteAll(){
+        messageService.deleteAll();
+    }
 }
