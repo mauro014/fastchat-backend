@@ -11,12 +11,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -26,8 +22,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 //https://github.com/lakshitha200/Spring-Security/blob/main/jwtDemo/src/main/java/jwtSecurity/example/jwtDemo/Config/SecurityConfig.java
 //https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter
 public class WebSecurityConfig  {
-
-    private final JwtTokenProvider jwtTokenProvider;
 
     private JwtAuthenticationEntryPoint authenticationEntryPoint;
 
