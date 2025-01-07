@@ -36,7 +36,6 @@ public class JwtTokenProvider {
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    // Get username (subject) from the JWT token
     public String getEmailFromToken(String token) {
 
         Claims claims = Jwts.parser()
