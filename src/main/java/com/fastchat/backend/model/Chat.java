@@ -2,7 +2,6 @@ package com.fastchat.backend.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,22 +9,17 @@ import java.util.Date;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Message {
+@NoArgsConstructor
+public class Chat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String sender;
-    private String content;
     private Date timestamp;
 
     @ManyToOne
-    private User user;
-
+    private User user1;
     @ManyToOne
-    private Chat chat;
-
+    private User user2;
 }

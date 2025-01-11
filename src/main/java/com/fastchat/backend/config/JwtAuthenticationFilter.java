@@ -52,10 +52,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     // Extract the token
     private String getTokenFromRequest(HttpServletRequest request){
 
-        for (Cookie cookie : request.getCookies()) {
-            if (cookie.getName().equals("jwt")) {
-                return cookie.getValue();
+        try {
+            for (Cookie cookie : request.getCookies()) {
+                if (cookie.getName().equals("jwt")) {
+                    return cookie.getValue();
+                }
             }
+        } catch (Exception e) {
+            return null;
         }
 
         return null;
