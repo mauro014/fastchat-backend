@@ -1,20 +1,20 @@
 package com.fastchat.backend.service;
 
+import com.fastchat.backend.model.Chat;
 import com.fastchat.backend.model.Message;
 import com.fastchat.backend.repository.MessageRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
 public class MessageService {
 
     private final MessageRepository messageRepository;
-    private SimpMessagingTemplate messagingTemplate;
 
     public List<Message> getAllMessages() {
         return messageRepository.findAll();
@@ -33,7 +33,7 @@ public class MessageService {
         return messageRepository.findByChatId(chatId);
     }
 
-    public void sendPrivateMessage(String recipient, String message) {
-        messagingTemplate.convertAndSendToUser(recipient, "/queue/reply", message);
+    public Optional<Message> getMessageById(Long id) {
+        return messageRepository.findById(id);
     }
 }

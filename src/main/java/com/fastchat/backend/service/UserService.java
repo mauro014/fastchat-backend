@@ -22,7 +22,7 @@ public class UserService {
 
         User newUser = new User();
         newUser.setEmail(email);
-        newUser.setNombre(nombre);
+        newUser.setName(nombre);
         newUser.setTimestamp(new Date());
 
         return userRepository.save(newUser);

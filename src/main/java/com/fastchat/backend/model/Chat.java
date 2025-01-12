@@ -22,4 +22,7 @@ public class Chat {
     private User user1;
     @ManyToOne
     private User user2;
+
+    @Transient
+    private boolean newMessages;
 }

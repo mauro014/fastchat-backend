@@ -1,73 +1,50 @@
 package com.fastchat.backend.api;
 
 import com.fastchat.backend.model.Chat;
-import com.fastchat.backend.model.Message;
+import com.fastchat.backend.repository.UserRepository;
 import com.fastchat.backend.service.ChatService;
 import com.fastchat.backend.service.MessageService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-//https://spring.io/guides/gs/messaging-stomp-websocket
-@Controller
+@CrossOrigin(origins = "${FRONT_URL}", allowCredentials = "true")
+@RestController
 @AllArgsConstructor
 public class ChatController {
 
-    private final MessageService messageService;
     private final ChatService chatService;
-    private SimpMessagingTemplate messagingTemplate;
 
-    @MessageMapping("/sendMessage")
-    @SendTo("/topic/messages")
-    public Message sendMessage(Message message) {
-        messageService.save(message);
-        return message;
+    @GetMapping("/chatsByUser/{email}")
+    public List<Chat> getChatsByUser(@PathVariable String email) {
+        return chatService.getChatsByUserEmail(email);
     }
 
-    @MessageMapping("deleteAllMessages")
-    @SendTo("/topic/messages")
-    public String deleteAll(){
-        messageService.deleteAll();
-        return  "CLEAR";
-    }
+    @GetMapping("/chatById/{idChat}")
+    public Object chatById(@PathVariable Long idChat) {
 
-    @MessageMapping("/createChat")
-    @SendTo("/topic/chat/{userId}")
-    public Chat createChat(String chatData) throws Exception {
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(chatData);
-
-        return chatService.createChat(
-            jsonNode.get("email1").asText(),
-            jsonNode.get("email2").asText()
-        );
-    }
-
-    @MessageMapping("/messages/{chatId}")
-    @SendTo("/topic/messages")
-    public List<Message> getMessagesByChatId(@PathVariable Long chatId) {
-        return messageService.getMessagesByChatId(chatId);
-    }
-
-    @MessageMapping("/newChat")
-    public void handleChat(Long idChat) {
-        Optional<Chat> chat = chatService.getChatById(idChat);
-
-        if(chat.isPresent()) {
-            messagingTemplate.convertAndSend("/topic/chat/" + chat.get().getUser1().getEmail(), chat);
-            messagingTemplate.convertAndSend("/topic/chat/" + chat.get().getUser2().getEmail(), chat);
+        try {
+            return chatService.getChatById(idChat);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
+    @PostMapping("/createChat")
+    public Object createChat(@RequestBody Map<String, String> chatData) {
+
+        try {
+            String email1 = chatData.get("email1");
+            String email2 = chatData.get("email2");
+
+            return chatService.createChat(email1, email2);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 }
