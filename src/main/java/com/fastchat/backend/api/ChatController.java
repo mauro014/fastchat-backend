@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@CrossOrigin(origins = "${FRONT_URL}", allowCredentials = "true")
+@CrossOrigin(originPatterns = "*", allowCredentials = "true")
 @RestController
 @AllArgsConstructor
 public class ChatController {
