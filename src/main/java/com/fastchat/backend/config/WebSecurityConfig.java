@@ -23,8 +23,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 //https://spring.io/blog/2022/02/21/spring-security-without-the-websecurityconfigureradapter
 public class WebSecurityConfig  {
 
-    private JwtAuthenticationEntryPoint authenticationEntryPoint;
-
     private JwtAuthenticationFilter authenticationFilter;
 
     @Bean
@@ -43,9 +41,6 @@ public class WebSecurityConfig  {
                 })
                     .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                     .httpBasic(Customizer.withDefaults());
-
-            http.exceptionHandling( exception -> exception
-                .authenticationEntryPoint(authenticationEntryPoint));
 
             http.addFilterAfter(
                     authenticationFilter,

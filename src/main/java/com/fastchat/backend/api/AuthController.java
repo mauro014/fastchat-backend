@@ -47,13 +47,7 @@ public class AuthController {
 
                 String token = jwtTokenProvider.generateToken(accessToken);
 
-                Cookie jwtCookie = new Cookie("jwt", token);
-                jwtCookie.setHttpOnly(true);
-                jwtCookie.setSecure(true);
-                jwtCookie.setPath("/");
-                jwtCookie.setMaxAge(86400);
-
-                response.addCookie(jwtCookie);
+                response.addHeader("Set-Cookie", "jwt=" + token + "; Path=/; Max-Age=86400; Secure; HttpOnly; SameSite=None");
 
                 return ResponseEntity.ok(profile);
 
