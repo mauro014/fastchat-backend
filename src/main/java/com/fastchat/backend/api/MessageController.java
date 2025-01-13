@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(originPatterns = "*", allowCredentials = "true")
+@CrossOrigin(origins = "${FRONT_URL}", allowCredentials = "true")
 @RestController
 @AllArgsConstructor
 public class MessageController {
