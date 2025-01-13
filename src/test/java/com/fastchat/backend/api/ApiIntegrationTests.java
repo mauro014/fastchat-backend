@@ -128,7 +128,7 @@ public class ApiIntegrationTests {
         Assertions.assertThat(foundChat.getId()).isEqualTo(chat.getId());
 
     }
-    
+
     private String autenticateUser(String mockAccessToken){
         String url = apiUrl + "/auth/validateToken";
         ResponseEntity<String> responseEntity =
