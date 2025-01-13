@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "${FRONT_URL}", allowCredentials = "true")
+@CrossOrigin(origins = "https://fastchat-frontend.onrender.com/", allowCredentials = "true")
 @RestController
 @AllArgsConstructor
 public class MessageController {

@@ -16,7 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
-@CrossOrigin(origins = "${FRONT_URL}", allowCredentials = "true")
+@CrossOrigin(origins = "https://fastchat-frontend.onrender.com/", allowCredentials = "true")
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
