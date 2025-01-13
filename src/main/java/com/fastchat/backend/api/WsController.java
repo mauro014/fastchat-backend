@@ -33,13 +33,6 @@ public class WsController {
         return message;
     }
 
-    @MessageMapping("deleteAllMessages")
-    @SendTo("/topic/messages")
-    public String deleteAll(){
-        messageService.deleteAll();
-        return  "CLEAR";
-    }
-
     @MessageMapping("/notifyChat")
     public void notifyChat(Long idChat) {
         Optional<Chat> chat = chatService.getChatById(idChat);

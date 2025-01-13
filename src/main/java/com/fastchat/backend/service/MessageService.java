@@ -16,24 +16,16 @@ public class MessageService {
 
     private final MessageRepository messageRepository;
 
-    public List<Message> getAllMessages() {
-        return messageRepository.findAll();
-    }
-
     public void save(Message message) {
         message.setTimestamp(new Date());
         messageRepository.save(message);
     }
 
-    public void deleteAll(){
-        messageRepository.deleteAll();
+    public Optional<Message> getMessageById(Long id) {
+        return messageRepository.findById(id);
     }
 
     public List<Message> getMessagesByChatId(Long chatId) {
         return messageRepository.findByChatId(chatId);
-    }
-
-    public Optional<Message> getMessageById(Long id) {
-        return messageRepository.findById(id);
     }
 }

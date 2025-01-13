@@ -1,6 +1,7 @@
 package com.fastchat.backend.repository;
 
 import com.fastchat.backend.model.Message;
+import com.fastchat.backend.model.User;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.*;
@@ -16,22 +17,48 @@ import java.util.Date;
 @DataJpaTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @TestPropertySource(locations = "classpath:application-test.properties")
-public class MessageRepositoryTest {
+public class RepositoryTest {
 
     @Autowired
     private MessageRepository messageRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @Test
-    @DisplayName("Test 1:Save Employee Test")
+    @DisplayName("Test 1:Save User Test")
+    @Rollback(value = false)
+    public void saveUserTest(){
+
+        User user = new User();
+        user.setName("test");
+        user.setEmail("test");
+        user.setTimestamp(new Date());
+
+        userRepository.save(user);
+
+        Assertions.assertThat(user.getId()).isGreaterThan(0);
+    }
+
+    @Test
+    @DisplayName("Test 1:Save Message Test")
     @Order(1)
     @Rollback(value = false)
     public void saveMessageTest(){
+
+        User user = new User();
+        user.setName("test");
+        user.setEmail("test");
+        user.setTimestamp(new Date());
+
+        userRepository.save(user);
 
         Message message = new Message();
 
         message.setSender("mauro");
         message.setContent("content");
         message.setTimestamp(new Date());
+        message.setUser(user);
 
         messageRepository.save(message);
 

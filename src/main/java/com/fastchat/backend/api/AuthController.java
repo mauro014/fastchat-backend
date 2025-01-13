@@ -63,11 +63,6 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid auth token");
     }
 
-    @GetMapping("/validate")
-    public boolean validateToken(@RequestParam String token) {
-        return jwtTokenProvider.validateToken(token);
-    }
-
     @GetMapping("/auth/status")
     public ResponseEntity<?> checkAuthStatus() {
         if (SecurityContextHolder.getContext().getAuthentication() != null) {
