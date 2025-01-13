@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-@CrossOrigin(origins = "https://fastchat-frontend.onrender.com/", allowCredentials = "true")
+@CrossOrigin(origins = "${FRONT_URL}", allowCredentials = "true")
 @RestController
 @AllArgsConstructor
 public class ChatController {
