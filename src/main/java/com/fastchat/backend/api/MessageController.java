@@ -16,18 +16,19 @@ import java.util.List;
 @CrossOrigin(origins = "${FRONT_URL}", allowCredentials = "true")
 @RestController
 @AllArgsConstructor
+@RequestMapping("/message/")
 public class MessageController {
 
     private final MessageService messageService;
     private final ChatService chatService;
     private final UserRepository userRepository;
 
-    @GetMapping("/messagesByChatId/{chatId}")
+    @GetMapping("/byChatId/{chatId}")
     public List<Message> getMessagesByChatId(@PathVariable Long chatId) {
         return messageService.getMessagesByChatId(chatId);
     }
 
-    @PostMapping("/sendMessage")
+    @PostMapping("/send")
     public Object sendMessage(@RequestBody Message message) {
 
         try {

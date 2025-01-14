@@ -52,25 +52,4 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid auth token");
     }
 
-    @GetMapping("/auth/status")
-    public ResponseEntity<?> checkAuthStatus() {
-        if (SecurityContextHolder.getContext().getAuthentication() != null) {
-            String username = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            return ResponseEntity.ok("OK");
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("ERROR");
-        }
-    }
-
-    @GetMapping("/logout")
-    public ResponseEntity<?> logout(HttpServletResponse response) {
-        Cookie cookie = new Cookie("token", null);
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(0); // Expire immediately
-        response.addCookie(cookie);
-        return ResponseEntity.ok().body("Logged out");
-    }
-
 }

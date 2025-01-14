@@ -82,7 +82,7 @@ public class ApiIntegrationTests {
         chatData.put("email2", mockEmail2);
 
         //Create chat
-        String urlCreate = apiUrl + "/createChat";
+        String urlCreate = apiUrl + "/chat/create";
 
         HttpHeaders headers = createHeadersBasic();
         headers.add(HttpHeaders.COOKIE, JWTCookie1);
@@ -99,7 +99,7 @@ public class ApiIntegrationTests {
         Assertions.assertThat(chat.getUser2().getEmail()).isEqualTo(mockEmail2);
 
         //Retrieve chat
-        String urlChatById = apiUrl + "/chatById/" + chat.getId();
+        String urlChatById = apiUrl + "/chat/get/" + chat.getId();
         RequestEntity<Void> requestChatById = new RequestEntity<>(headers, HttpMethod.GET, URI.create(urlChatById));
         ResponseEntity<Chat> responseGetChat = restTemplate.exchange(
                 requestChatById, Chat.class);
@@ -108,7 +108,7 @@ public class ApiIntegrationTests {
         Assertions.assertThat(responseGetChat.getBody().getId()).isEqualTo(chat.getId());
 
         //Retrieve all chats by user
-        String urlChatByUser = apiUrl + "/chatsByUser/" + mockEmail2;
+        String urlChatByUser = apiUrl + "/chat/byUser/" + mockEmail2;
         RequestEntity<Void> requestByUser = new RequestEntity<>(headers, HttpMethod.GET, URI.create(urlChatByUser));
         //https://medium.com/@rtj1857/how-to-use-parametizedtypereference-in-spring-boot-for-rest-api-calls-c3168a46f4df
         ResponseEntity<List<Chat>> responseByUser = restTemplate.exchange(

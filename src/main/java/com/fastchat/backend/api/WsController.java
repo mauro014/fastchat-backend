@@ -5,16 +5,11 @@ import com.fastchat.backend.model.Message;
 import com.fastchat.backend.model.User;
 import com.fastchat.backend.service.ChatService;
 import com.fastchat.backend.service.MessageService;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
 import java.util.Optional;
 
 //https://spring.io/guides/gs/messaging-stomp-websocket

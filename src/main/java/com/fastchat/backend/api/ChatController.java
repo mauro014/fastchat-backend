@@ -1,9 +1,7 @@
 package com.fastchat.backend.api;
 
 import com.fastchat.backend.model.Chat;
-import com.fastchat.backend.repository.UserRepository;
 import com.fastchat.backend.service.ChatService;
-import com.fastchat.backend.service.MessageService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,21 +9,21 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @CrossOrigin(origins = "${FRONT_URL}", allowCredentials = "true")
 @RestController
 @AllArgsConstructor
+@RequestMapping("/chat")
 public class ChatController {
 
     private final ChatService chatService;
 
-    @GetMapping("/chatsByUser/{email}")
+    @GetMapping("/byUser/{email}")
     public List<Chat> getChatsByUser(@PathVariable String email) {
         return chatService.getChatsByUserEmail(email);
     }
 
-    @GetMapping("/chatById/{idChat}")
+    @GetMapping("/get/{idChat}")
     public Object chatById(@PathVariable Long idChat) {
 
         try {
@@ -35,7 +33,7 @@ public class ChatController {
         }
     }
 
-    @PostMapping("/createChat")
+    @PostMapping("/create")
     public Object createChat(@RequestBody Map<String, String> chatData) {
 
         try {

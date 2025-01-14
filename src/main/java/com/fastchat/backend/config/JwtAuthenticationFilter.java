@@ -22,7 +22,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-
     // This method is executed for every request intercepted by the filter.
     //And, it extract the token from the request header and validate the token.
     @Override
