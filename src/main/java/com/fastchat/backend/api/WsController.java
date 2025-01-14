@@ -26,13 +26,6 @@ public class WsController {
     private final ChatService chatService;
     private SimpMessagingTemplate messagingTemplate;
 
-    @MessageMapping("/sendMessage2")
-    @SendTo("/topic/messages2")
-    public Message sendMessage(Message message) {
-        messageService.save(message);
-        return message;
-    }
-
     @MessageMapping("/notifyChat")
     public void notifyChat(Long idChat) {
         Optional<Chat> chat = chatService.getChatById(idChat);

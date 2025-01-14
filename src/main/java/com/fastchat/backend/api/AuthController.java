@@ -31,7 +31,6 @@ public class AuthController {
     public ResponseEntity<?> validateToken(@RequestBody JsonNode requestBody, HttpServletResponse response) throws JsonProcessingException {
 
         String accessToken = requestBody.get("accessToken").asText();
-
         String profile = googleProfileService.getGoogleProfile(accessToken);
 
         if(profile != null)
@@ -44,13 +43,9 @@ public class AuthController {
                     jsonNode.get("name").asText());
 
             if(user != null) {
-
                 String token = jwtTokenProvider.generateToken(accessToken);
-
                 response.addHeader("Set-Cookie", "jwt=" + token + "; Path=/; Max-Age=86400; Secure; HttpOnly; SameSite=None");
-
                 return ResponseEntity.ok(profile);
-
             }
         }
 
