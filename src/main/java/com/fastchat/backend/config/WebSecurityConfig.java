@@ -26,11 +26,6 @@ public class WebSecurityConfig  {
     private JwtAuthenticationFilter authenticationFilter;
 
     @Bean
-    public static PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
             http.csrf(AbstractHttpConfigurer::disable)
@@ -45,7 +40,6 @@ public class WebSecurityConfig  {
             http.addFilterAfter(
                     authenticationFilter,
                     UsernamePasswordAuthenticationFilter.class);
-
 
         return http.build();
     }
