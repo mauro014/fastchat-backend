@@ -1,0 +1,18 @@
+services:
+  postgres-server:
+    image: "postgres:15.10-alpine"
+    environment:
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+      - POSTGRES_DB=mydb
+  springboot-app:
+    restart: "no"
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_URL=postgresql://postgres-server:5432/mydb
+      - DB_USER=myuser
+      - DB_PASSWORD=mypassword
+      - JWT_SECRET=cb08bb79f11fcdd1fade3fe51bb7579fd9aaeefd23cded8b7fc29af699ddd1bebb69b7e53c21b18ed3c709ad2e1c2f6d7bfe
+      - FRONT_URL=http://localhost:3000/
